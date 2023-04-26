@@ -1,46 +1,42 @@
 const itemInput = document.getElementById('item-input');
 
-const onKeyPress = (e) => {
-  console.log('keypress');
+const onKeyPress = event => {
+    console.log('keypress');
 };
 
-const onKeyUp = (e) => {
-  console.log('keyup');
+const onKeyUp = event => {
+    console.log('keyup');
 };
 
-const onKeyDown = (e) => {
-  // key
-  // if (e.key === 'Enter') {
-  //   alert('You pressed enter');
-  // }
+const onKeyDown = event => {
+    // key
+    // if (event.key === 'Enter') {
+    //     alert('You pressed enter');
+    // }
 
-  // keyCode
-  // https://www.toptal.com/developers/keycode/table-of-all-keycodes
-  if (e.keyCode === 13) {
-    alert('You pressed enter');
-  }
+    // keyCode
+    if (event.keyCode === 13) {
+        alert('You pressed enter');
+    }
 
-  // code
-  if (e.code === 'Digit1') {
-    console.log('You pressed 1');
-  }
+    // Code
+    if (event.code === 'Digit1') {
+        console.log('You pressed 1');
+    };
 
-  // repeat
-  if (e.repeat) {
-    console.log('You are holding down ' + e.key);
-  }
+    if (event.repeat) {
+        console.log('You are holding down ' + event.key);
+    }
 
-  // shiftKey, ctrlKey & altKey
-  console.log('Shift: ' + e.shiftKey);
-  console.log('Control: ' + e.ctrlKey);
-  console.log('Alt: ' + e.altKey);
+    console.log('Shift: ' + event.shiftKey);
+    console.log('Control: ' + event.ctrlKey);
+    console.log('Alt: ' + event.altKey);
 
-  if (e.shiftKey && e.key === 'K') {
-    console.log('You hit shift + K');
-  }
-};
+    if (event.shiftKey && event.key === 'K') {
+        console.log('You pressed shift + K');
+    }
+}
 
-// Event Listeners
-itemInput.addEventListener('keypress', onKeyPress);
-itemInput.addEventListener('keyup', onKeyUp);
+// itemInput.addEventListener('keypress', onKeyPress);
+// itemInput.addEventListener('keyup', onKeyUp);
 itemInput.addEventListener('keydown', onKeyDown);

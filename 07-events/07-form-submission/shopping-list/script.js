@@ -1,40 +1,37 @@
 const form = document.getElementById('item-form');
 
-function onSubmit(e) {
-  e.preventDefault();
+function onSubmit(event) {
+    event.preventDefault();
 
-  // Get value with .value
-  const item = document.getElementById('item-input').value;
-  const priority = document.getElementById('priority-input').value;
+    const item = document.getElementById('item-input').value;
+    const priority = document.getElementById('priority-input').value;
 
-  if (item === '' || priority === '0') {
-    alert('Please fill in all fields');
-    return;
-  }
+    if (item === '' || priority === '0') {
+        alert('Please enter a value for both fields');
+        return;
+    }
 
-  console.log(item, priority);
+    console.log(item, priority);
 }
 
-// Using the FormData Object
-function onSubmit2(e) {
-  e.preventDefault();
+function onSubmit2(event) {
+    event.preventDefault();
 
-  const formData = new FormData(form);
+    // Access the FormData object from the form element
+    const formData = new FormData(form);
 
-  // Get individual items
-  const item = formData.get('item');
-  const priority = formData.get('priority');
+    // Form input needs to have a name attribute, 'item' and 'priority' in this case
+    // const item = formData.get('item');
+    // const priority = formData.get('priority');
 
-  console.log(item, priority);
+    const entries = formData.entries();
+    // console.log(entries);
 
-  // Get al entried as an Iterator
-  const entries = formData.entries();
-  console.log(entries);
+    for (let entry of entries) {
+        console.log(entry[1]);
+    }
 
-  // Loop through entries
-  for (let entry of entries) {
-    console.log(entry[1]);
-  }
+    // console.log(item, priority);
 }
 
 form.addEventListener('submit', onSubmit2);
