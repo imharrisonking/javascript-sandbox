@@ -13,10 +13,12 @@ const promise = new Promise((resolve, reject) => {
 
 const getUser = new Promise((resolve, reject) => {
   setTimeout(() => {
-    let error = true;
+    let error = false;
 
+    // If there is no error then resolve the promise
     if (!error) {
       resolve({ name: 'John', age: 30 });
+    // If there is an error then reject the promise
     } else {
       reject('Error: Something went wrong');
     }
@@ -24,8 +26,9 @@ const getUser = new Promise((resolve, reject) => {
 });
 
 getUser
-  .then((user) => console.log(user))
-  .catch((error) => console.log(error))
-  .finally(() => console.log('The promise has been resolved or rejected'));
+    .then((user) => console.log(user))
+    .catch((error) => console.log(error))
+    // Finally will run no matter what
+    .finally(() => console.log('The promise has been resolved or rejected'));
 
 console.log('Hello from global scope');

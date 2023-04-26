@@ -1,24 +1,22 @@
-const jokeEl = document.getElementById('joke');
-const jokeBtn = document.getElementById('joke-btn');
+// Update the joke when the button is clicked
+const button = document.getElementById('joke-btn');
 
-const generateJoke = () => {
-  const xhr = new XMLHttpRequest();
-
-  xhr.open('GET', 'https://api.chucknorris.io/jokes/random');
-
-  xhr.onreadystatechange = function () {
-    if (this.readyState === 4) {
-      if (this.status === 200) {
-        // console.log(JSON.parse(this.responseText).value);
-        jokeEl.innerHTML = JSON.parse(this.responseText).value;
-      } else {
-        jokeEl.innerHTML = 'Something Went Wrong (Not Funny)';
-      }
-    }
-  };
-
-  xhr.send();
+// Function
+function getJoke() {
+    const xhr = new XMLHttpRequest();
+    xhr.open('GET', 'https://api.chucknorris.io/jokes/random');
+    xhr.onreadystatechange = function () {
+        if (this.readyState === 4 && this.status === 200) {
+            const data = JSON.parse(this.responseText);
+    
+            const joke = document.querySelector('#joke');
+            joke.innerHTML = data.value;
+        };
+    };
+    
+    xhr.send();
 };
 
-jokeBtn.addEventListener('click', generateJoke);
-document.addEventListener('DOMContentLoaded', generateJoke);
+// Event listeners
+window.addEventListener('load', getJoke);
+button.addEventListener('click', getJoke);

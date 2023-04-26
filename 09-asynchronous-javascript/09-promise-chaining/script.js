@@ -11,19 +11,19 @@ const promise = new Promise((resolve, reject) => {
 });
 
 promise
-  .then((user) => {
-    console.log(user);
-    return user.name;
-  })
-  .then((name) => {
-    console.log(name);
-    return name.length;
-  })
-  .then((nameLength) => {
-    console.log(nameLength);
-  })
-  .catch((error) => {
-    console.log(error);
-    return 123;
-  })
-  .then((x) => console.log('This will run no matter what', x));
+    .then((user) => {
+        console.log(user);
+        return user.name;
+    })
+    .then((name) => {
+        console.log(name);
+        return name.length;
+    })
+    .then((nameLength) => {
+        console.log(nameLength);
+    })
+    .catch((error) => {
+        console.log(error)
+        return 123;
+    })
+    .then((x) => console.log('This will run no matter what', x));
