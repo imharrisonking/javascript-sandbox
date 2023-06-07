@@ -3,34 +3,32 @@
 // [[Writable]] - if `true`, the value of the property can be changed, otherwise not
 // [[Value]] - the value of the property
 
-Math.PI = 4;
 console.log(Math.PI);
 
 let descriptor = Object.getOwnPropertyDescriptor(Math, 'PI');
-// console.log(descriptor);
 
 const rectObj = {
-  name: 'Rectangle 1',
-  width: 10,
-  height: 10,
+    name: 'Rectangle',
+    width: 10,
+    height: 5,
 };
 
 Object.defineProperty(rectObj, 'name', {
-  writable: false,
-  configurable: false,
-  enumerable: false,
+    writable: false,
+    configurable: false,
+    enumerable: false,
 });
 
 descriptor = Object.getOwnPropertyDescriptor(rectObj, 'name');
 console.log(descriptor);
 
-rectObj.name = 'New Name';
+rectObj.name = 'Square';
 delete rectObj.name;
+console.log(rectObj.name);
 
-console.log(rectObj);
-
+// Wont' show name in the loop as it's not enumerable
 for (let [key, value] of Object.entries(rectObj)) {
-  console.log(`${key}: ${value}`);
+    console.log(`${key}: ${value}`)
 }
 
 console.log(Object.getOwnPropertyDescriptors(rectObj));

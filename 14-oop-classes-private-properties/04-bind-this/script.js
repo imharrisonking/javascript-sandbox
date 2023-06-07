@@ -1,15 +1,15 @@
 class App {
-  constructor() {
-    this.serverName = 'localhost';
+    constructor() {
+        this.serverName = 'localhost';
 
-    document
-      .querySelector('button')
-      .addEventListener('click', this.getServerName.bind(this));
-  }
+        document
+            .querySelector('button')
+            .addEventListener('click', this.getServerName.bind(this));
+    }
 
-  getServerName() {
-    console.log(this);
-  }
+    getServerName() {
+        console.log(this.serverName);
+    }
 }
 
 const app = new App();

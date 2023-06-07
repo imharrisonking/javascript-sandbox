@@ -1,33 +1,29 @@
-function Rectangle(name, width, height) {
-  this.name = name;
-  this.width = width;
-  this.height = height;
+class Rectangle {
+    constructor(name, width, height) {
+        this.name = name;
+        this.width = width;
+        this.height = height;
+    }
+
+    area() {
+        return this.width * this.height;
+    }
+
+    perimeter() {
+        return 2 * (this.width + this.height)
+    }
+
+    isSquare() {
+        return this.width === this.height;
+    }
+
+    logArea() {
+        console.log('Rectangle Area: ' + this.area() + 'm2');
+    }
 }
 
-Rectangle.prototype.area = function () {
-  return this.width * this.height;
-};
-
-Rectangle.prototype.perimeter = function () {
-  return 2 * (this.width + this.height);
-};
-
-Rectangle.prototype.isSquare = function () {
-  return this.width === this.height;
-};
-
-Rectangle.prototype.changeName = function (newName) {
-  return (this.name = newName);
-};
-
-const rect = new Rectangle('Rect', 10, 20);
-const rect2 = new Rectangle('Rect 2', 30, 40);
-
-console.log(rect);
-console.log(rect.area());
-console.log(rect.perimeter());
-console.log(rect.isSquare());
-rect.changeName('Test');
-console.log(rect.name);
-
-console.log(rect2.area());
+const square = new Rectangle('Square 1', 20, 20);
+console.log(square.area());
+console.log(square.perimeter());
+console.log(square.isSquare());
+square.logArea();

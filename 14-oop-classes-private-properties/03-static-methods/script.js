@@ -10,9 +10,10 @@ class Rectangle {
   }
 
   static getClass() {
-    return 'Rectangle';
+    return 'Rectangle'
   }
 }
+
 
 const rect = new Rectangle('Rect', 10, 10);
 console.log(rect.area());
