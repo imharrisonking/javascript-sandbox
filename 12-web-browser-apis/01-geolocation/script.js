@@ -1,57 +1,50 @@
-// getCurrentPosition()
+// getCurrentPosition() method
 
-function curSuccess(pos) {
-  const coords = pos.coords;
-
-  console.log(`Latitude: ${coords.latitude}`);
-  console.log(`Longitude: ${coords.longitude}`);
-  console.log(`Within: ${coords.accuracy} meters`);
+function curSuccess(position) {
+    const coords = position.coords;
+    console.log(`Latitude: ${coords.latitude}`);
+    console.log(`Longitude: ${coords.longitude}`);
+    console.log(`Accuracy: ${coords.accuracy} metres`);
 }
 
-function curError(err) {
-  console.log(`Error: ${err.code} - ${err.message}`);
+function curError(error) {
+    console.log(`Error: ${error.code} ${error.message}`);
 }
 
-const curOptions = {
-  enableHighAccuracy: true, // Use GPS if available
-  timeout: 5000, // Time to wait to stop trying for location
-  maximumAge: 0, // Do not use a cached position
+const options = {
+    enableHighAccuracy: true, // Use GPS if available
+    timeout: 5000, // Time to wait to stop trying to get the location
+    maximumAge: 0 // Do not use a cached location
 };
 
-// navigator.geolocation.getCurrentPosition(curSuccess, curError, curOptions);
+// navigator.geolocation.getCurrentPosition(curSuccess, curError, options);
 
-// watchPosition()
+// watchPosition() method
 
 const target = {
-  latitude: 41.3874387,
-  longitude: -71.394839,
-};
-
-function watchSuccess(pos) {
-  const coords = pos.coords;
-  console.log(coords);
-
-  if (
-    target.latitude === coords.latitude &&
-    target.longitude === coords.longitude
-  ) {
-    console.log('You have reached your destination!');
-    navigator.geolocation.clearWatch(id);
-  }
+    latitude: 53.349804,
+    longitude: -6.260310
 }
 
-function watchError(err) {
-  console.log(`Error: ${err.code} - ${err.message}`);
+function watchSuccess(position) {
+    const coords = position.coords;
+    console.log(`Latitude: ${coords.latitude}`);
+    console.log(`Longitude: ${coords.longitude}`);
+
+    if (target.latitude === coords.latitude && target.longitude === coords.longitude) {
+        console.log('You have reached your destination');
+        navigator.geolocation.clearWatch(watchId);
+    }
+}
+
+function watchError(error) {
+    console.log(`Error: ${error.code} ${error.message}`);
 }
 
 const watchOptions = {
-  enableHighAccuracy: true, // Use GPS if available
-  timeout: 5000, // Time to wait to stop trying for location
-  maximumAge: 0, // Do not use a cached position
+    enableHighAccuracy: true, // Use GPS if available
+    timeout: 5000, // Time to wait to stop trying to get the location
+    maximumAge: 0 // Do not use a cached location
 };
 
-const id = navigator.geolocation.watchPosition(
-  watchSuccess,
-  watchError,
-  watchOptions
-);
+navigator.geolocation.watchPosition(watchSuccess, watchError, watchOptions);
