@@ -1,120 +1,123 @@
 class Node {
-  constructor(value) {
-    this._value = value;
-    this.next = null;
-  }
+    constructor(value) {
+        this.value = value;
+        this.next = null;
+    }
 }
 
 class LinkedList {
-  constructor() {
-    this._head = null;
-    this._length = 0;
-  }
-
-  // Insert first node (Head)
-  insertFirst(value) {
-    const newNode = new Node(value);
-    newNode.next = this._head;
-    this._head = newNode;
-    this._length++;
-  }
-
-  // Insert last node (Tail)
-  insertLast(value) {
-    const newNode = new Node(value);
-    let current = this._head;
-
-    while (current.next) {
-      current = current.next;
+    constructor() {
+        this.head = null;
+        this.length = 0;
     }
 
-    current.next = newNode;
-    this.length++;
-  }
-
-  // Insert at index
-  insertAt(value, index) {
-    if (index > this._length) {
-      return;
+    // Insert the first node at head
+    insertFirst(value) {
+        const node = new Node(value);
+        node.next = this.head;
+        this.head = node;
+        this.length++;
     }
 
-    if (index === 0) {
-      this.insertFirst(value);
-      return;
+    // Insert the last node at tail
+    insertLast(value) {
+        const node = new Node(value);
+        let current = this.head;
+
+        while (current.next) {
+            current = current.next;
+        }
+
+        current.next = node;
+        this.length++;
     }
 
-    const newNode = new Node(value);
-    let current, previous;
-    current = this._head;
-    let count = 0;
+    // Insert at index
+    insert(value, index) {
+        if (index > this.length) {
+            return;
+        }
 
-    while (count < index) {
-      previous = current;
-      current = current.next;
-      count++;
+        if (index === 0) {
+            return this.insertFirst(value);
+        }
+
+        const node = new Node(value);
+        let current, previous;
+        current = this.head;
+        let count = 0;
+
+        while (count < index) {
+            previous = current;
+            current = current.next;
+            count++;
+        }
+
+        node.next = current;
+        previous.next = node;
+        this.length++;
     }
 
-    newNode.next = current;
-    previous.next = newNode;
-    this._length++;
-  }
+    // Get at index
+    getAt(index) {
+        let current = this.head;
+        let count = 0;
 
-  // Get at index
-  getAt(index) {
-    let current = this._head;
-    let count = 0;
-    while (current) {
-      if (count === index) {
-        console.log(current._value);
-      }
-      count++;
-      current = current.next;
-    }
-    return null;
-  }
+        while (current) {
+            if (count === index) {
+                console.log(current.value);
+                return current.value;
+            }
 
-  // Remove at index
-  removeAt(index) {
-    if (index > this._length) {
-      return;
+            count++;
+            current = current.next;
+        }
+
+        return null;
     }
 
-    let current = this._head;
-    let previous;
-    let count = 0;
+    // Remove at index
+    removeAt(index) {
+        if (index > this.length) {
+            return;
+        }
 
-    if (index === 0) {
-      this._head = current.next;
-    } else {
-      while (count < index) {
-        count++;
-        previous = current;
-        current = current.next;
-      }
-      previous.next = current.next;
+        let current = this.head;
+        let previous;
+        let count = 0;
+
+        if (index === 0) {
+            this.head = current.next;
+        } else {
+            while (count < index) {
+                count++;
+                previous = current;
+                current = current.next;
+            }
+            previous.next = current.next;
+        }
+
+        this.length--;
     }
 
-    this._length--;
-  }
+    // Print list data
+    printListData() {
+        let current = this.head;
+        let list = '';
 
-  // Print list data
-  printListData() {
-    let current = this._head;
-    let list = '';
+        while (current) {
+            list += `${current.value} `;
+            current = current.next;
+        }
 
-    while (current) {
-      list += current._value + ' ';
-      current = current.next;
+        console.log(list);
     }
 
-    console.log(list);
-  }
-
-  // Clear list
-  clearListData() {
-    this._head = null;
-    this._length = 0;
-  }
+    // Clear list
+    clear() {
+        this.head = null;
+        this.length = 0;
+    }
 }
 
 const list = new LinkedList();
@@ -124,13 +127,19 @@ list.insertFirst(200);
 list.insertFirst(300);
 list.insertLast(50);
 list.insertLast(10);
-list.insertAt(500, 2);
-list.insertAt(600, 4);
+list.insert(500, 2);
+list.insert(600, 4);
 
-list.removeAt(2);
-list.removeAt(0);
-
-// list.clearListData();
 list.printListData();
-list.getAt(2);
+console.log('Remove at index 2:');
+list.removeAt(2);
+
+list.printListData();
 list.getAt(0);
+list.getAt(2);
+
+console.log('Clear list:');
+list.clear();
+list.printListData();
+
+// console.log(list);

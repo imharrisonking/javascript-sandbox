@@ -6,43 +6,42 @@ poll.set('Svelte', 0);
 poll.set('Other', 0);
 
 function submitForm(e) {
-  e.preventDefault();
+    e.preventDefault();
 
-  const selectedOption = document.querySelector(
-    "input[name='poll-option']:checked"
-  );
+    const choice = document.querySelector('input[name="poll-option"]:checked');
 
-  if (!selectedOption) {
-    alert('Please select an option');
-    return;
-  }
+    if (!choice) {
+        alert('Please select an option');
+        return
+    }
 
-  let voteCount = poll.get(selectedOption.value);
-  poll.set(selectedOption.value, voteCount + 1);
+    let voteCount = poll.get(choice.value);
+    poll.set(choice.value, ++voteCount);
 
-  displayResults();
+    displayResults();
 
-  // Disable form fields after submit
-  document
-    .getElementById('poll-form')
-    .querySelectorAll('input, button')
-    .forEach((el) => el.setAttribute('disabled', true));
+    // Disable form fields after submission
+    const pollForm = document.getElementById('poll-form');
+    pollForm.querySelectorAll('input').forEach(input => input.disabled = true);
+    pollForm.querySelector('button').disabled = true;
+
 }
 
 function displayResults() {
-  const results = document.getElementById('results');
-  results.innerHTML = '';
-  for (let [option, votes] of poll) {
-    const optionElement = document.createElement('div');
-    optionElement.classList.add(
-      'border-bottom',
-      'p-2',
-      'd-flex',
-      'justify-content-between'
-    );
-    optionElement.innerHTML = `<strong>${option}: </strong> ${votes} votes`;
-    results.appendChild(optionElement);
-  }
+    const results = document.getElementById('results');
+    results.innerHTML = '';
+    for (let [option, votes] of poll) {
+        const optionElement = document.createElement('div');
+        optionElement.classList.add(
+            'border-bottom',
+            'p-2',
+            'd-flex',
+            'justify-content-between',
+        );
+        optionElement.innerHTML = `
+        <strong>${option}: </strong> ${votes} votes`;
+        results.appendChild(optionElement);
+    }
 }
 
 document.getElementById('poll-form').addEventListener('submit', submitForm);

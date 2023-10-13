@@ -1,6 +1,6 @@
 const myMap = new Map();
 
-myMap.set('name', 'John');
+myMap.set('name', 'Harrison');
 myMap.set(1, 'blue');
 myMap.set(2, 'red');
 
@@ -17,23 +17,24 @@ myMap.delete(2);
 
 console.log(myMap);
 
-const peopleMap = new Map();
-peopleMap.set('brad', { phone: '555-555-5555', email: 'brad@gmail.com' });
-peopleMap.set('jack', { phone: '555-555-5555', email: 'jack@gmail.com' });
-peopleMap.set('jill', { phone: '555-555-5555', email: 'jill@gmail.com' });
+const people = new Map();
 
-peopleMap.forEach((person) => console.log(person.email));
+people.set('Harrison', {job: 'Developer', age: 25})
+people.set('Hester', {job: 'Product Manager', age: 26})
+people.set('Luka', {job: 'Broker', age: 27})
 
-console.log(peopleMap.keys());
-console.log(peopleMap.values());
-console.log(peopleMap.entries());
+people.forEach(person => console.log(person.job))
 
-const iterator = peopleMap.values();
+console.log(people.keys());
+console.log(people.values());
+console.log(people.entries());
+
+const iterator = people.values();
 
 console.log(iterator.next());
 console.log(iterator.next());
 console.log(iterator.next());
 console.log(iterator.next());
 
-const peopleArray = Array.from(peopleMap);
+const peopleArray = Array.from(people);
 console.log(peopleArray);
